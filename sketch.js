@@ -91,9 +91,17 @@ function movimentaMinhaRaquete() {
 }
 
 function movimentaRaqueteOponente() {
-  velocidadeYOponente = yBolinha - yRaqueteOponente - larguraRaquete / 2 - 30;
-  yRaqueteOponente += velocidadeYOponente;
+  if (keyIsDown(87)) {
+    yRaqueteOponente -= 10;
+  }
+  if (keyIsDown(83)) {
+    yRaqueteOponente += 10;
+  }
+  
+  /*velocidadeYOponente = yBolinha - yRaqueteOponente - larguraRaquete / 2 - 30;
+  yRaqueteOponente += velocidadeYOponente;*/
 }
+
 
 /* Uma forma de se escrever a função:
 
