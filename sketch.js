@@ -16,6 +16,11 @@ let yRaquete = 150;
 let larguraRaquete = 10;
 let alturaRaquete = 90;
 
+//Variáveis do oponete
+let xRaqueteOponente = 585;
+let yRaqueteOponente = 150;
+let velocidadeYOponente;
+
 let colidiu = false;
 
 function setup() {
@@ -27,10 +32,12 @@ function draw() {
   mostraBolinha();
   movimentaBolinha();
   verificaColisaoBorda();
-  mostraRaquete();
+  mostraRaquete(xRaquete, yRaquete);
   movimentaMinhaRaquete();
-  //verificaColisaoRaquete();
-  colisaoMinhaRaqueteBiblioteca();
+  verificaColisaoRaquete(xRaquete, yRaquete);
+  mostraRaquete(xRaqueteOponente, yRaqueteOponente);
+  movimentaRaqueteOponente();
+  verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
 }
 
 function mostraBolinha() {
@@ -52,8 +59,8 @@ function verificaColisaoBorda() {
   }
 }
 
-function mostraRaquete() {
-  rect(xRaquete, yRaquete, larguraRaquete, alturaRaquete);
+function mostraRaquete(x,y) {
+  rect(x, y, larguraRaquete, alturaRaquete);
 }
 
 function movimentaMinhaRaquete() {
@@ -65,14 +72,22 @@ function movimentaMinhaRaquete() {
   }
 }
 
-/* function verificaColisaoRaquete() {
+function movimentaRaqueteOponente() {
+  velocidadeYOponente = yBolinha - yRaqueteOponente - larguraRaquete / 2 - 30;
+  yRaqueteOponente += velocidadeYOponente;
+}
+
+/* Uma forma de se escrever a função:
+
+function verificaColisaoRaquete() {
   if (xBolinha - raioBolinha < xRaquete + larguraRaquete && yBolinha - raioBolinha < yRaquete + alturaRaquete && yBolinha + raioBolinha > yRaquete) {
     velocidadeXBolinha *= -1;
   }
-} */
+}
+*/
 
-function colisaoMinhaRaqueteBiblioteca() {
-  colidiu = collideRectCircle(xRaquete, yRaquete, larguraRaquete, alturaRaquete, xBolinha, yBolinha, raioBolinha);
+function verificaColisaoRaquete(x,y) {
+  colidiu = collideRectCircle(x, y, larguraRaquete, alturaRaquete, xBolinha, yBolinha, raioBolinha);
   if (colidiu){
     velocidadeXBolinha *= -1;
   }
